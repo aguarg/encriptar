@@ -34,20 +34,27 @@ def encrypt_message(message):
     global encrypted_message
     encrypted_message = f.encrypt(encoded_message)
 
-    print(encrypted_message)
+    
 
 
 generate_key()
 
 if __name__ == "__main__":
-   mensaje = input("Ingrese el texto e encriptar: ")
 
-   encrypt_message(mensaje)
+   accion = input("""PRESIONE:
+         1) PARA ENCRIPTAR 
+         2) PARA DESENCRIPTAR
+         """) 
 
-   # Generamos un archivo de texto con el mensaje ya encriptado:
-   archivo_mensaje_encriptado = open("mensaje_encriptado.txt", "w")
-   archivo_mensaje_encriptado.write(str(encrypted_message))
-   archivo_mensaje_encriptado.close()
+   if accion == "1":
+       mensaje = input("Ingrese el texto e encriptar: ")
 
+       encrypt_message(mensaje)
 
+       # Generamos un archivo de texto con el mensaje ya encriptado:
+       archivo_mensaje_encriptado = open("mensaje_encriptado.txt", "w")
+       archivo_mensaje_encriptado.write(str(encrypted_message))
+       archivo_mensaje_encriptado.close()
+
+       print("Archivo y clave creadas.")
 
