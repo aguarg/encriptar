@@ -2,7 +2,9 @@ from cryptography.fernet import Fernet
 
 
 mensaje = input("Ingrese el mensaje encriptado: ")
+mensaje = mensaje.encode()
 
+#funciona, si el mensaje encriptado es SOLO lo que está entre los "", dejando la b afuera.
 
 def decrypt_message(encrypted_message):
     

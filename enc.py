@@ -28,7 +28,7 @@ def encrypt_message(message):
     global encrypted_message
     encrypted_message = f.encrypt(encoded_message)
 
-    print(encrypted_message)
+   
 
 
 
