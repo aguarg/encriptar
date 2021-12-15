@@ -1,30 +1,24 @@
 from cryptography.fernet import Fernet
 
 
-
+# Genera la llave y la guarda en un archivo:
 def generate_key(): 
-    """
-    Generates a key and save it into a file
-    Los archivos con extensión .key se usan para las llaves.
-
-    """
+    
     key = Fernet.generate_key()
-    with open("secret.key", "wb") as key_file: #with es una sentencia propia de python para abrir archivos. 
+    with open("secret.key", "wb") as key_file: 
         key_file.write(key)
 
 
-
+# Carga la llave generada por la función generate_key():
 def load_key():
-    """
-    Load the previously generated key
-    """
+    
     return open("secret.key", "rb").read()
 
 
 # Encripta el mensaje:
 def encrypt_message(message):
     
-    # Carga la llave que generó generate_key():
+    # Asigna la llave que generó generate_key() a la variable key:
     key = load_key()
     
     # Codifica el mensaje y lo encripta: 
@@ -35,6 +29,8 @@ def encrypt_message(message):
     encrypted_message = f.encrypt(encoded_message)
 
     print(encrypted_message)
+
+
 
 
 generate_key()
