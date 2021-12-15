@@ -1,20 +1,26 @@
 from cryptography.fernet import Fernet
 
+# Input para ingresar el mensaje encriptado:
+mensaje = input("Ingrese el mensaje encriptado: ")
 
-# Cargar la llave:
-def load_key():
-    
-    return open("secret.key", "rb").read()
+# Codifica el mensaje a bytes y saca el b" iniciales y el " del final en el mensaje encriptado:
+mensaje = mensaje.encode()[1:-1]
+# el método encode() transforma las strings a bytes, necesarios para el módulo Fernet, que no acepta strings como tokens.
 
 
-# Desencripta el mensaje:
+# Función que desencripta el mensaje:
 def decrypt_message(encrypted_message):
     
-    key = load_key()
+    key = input("Ingrese la llave: " )
+
     f = Fernet(key)
+    
+    # Desencripta el mensaje usando la llave asignada a f, ingresada por el usuario.
     decrypted_message = f.decrypt(encrypted_message)
 
     print(decrypted_message.decode())
 
+
+
 if __name__ == "__main__":
-    decrypt_message(b'gAAAAABhtO2IvAUMf5zgY7V3UTVilkQjkcwJ5iA4Y8KGS9sQbKlLDz8Vv24ium4O08FJPivZeAscYlxCJ5MChr_6lZNu5OAJewulhp1NxDwD7SYgGh05gwTByxv_9T0NMkK6UsCeqtEMSW7SR3dLzmyCVIPqoUvsyjAyXoKgEGVlFMW8jRR9VkCS96zJEVAk4mXi-a2YO6YU')
+    decrypt_message(mensaje)
