@@ -45,5 +45,8 @@ if __name__ == "__main__":
    archivo_mensaje_encriptado.write(str(encrypted_message))
    archivo_mensaje_encriptado.close()
 
+   print("Llave generada.")
+   print("Mensaje encriptado exitosamente.")
+
 
 
