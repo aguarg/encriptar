@@ -1,5 +1,6 @@
 from cryptography.fernet import Fernet
 
+# SECCIÓN CON CÓDIGO PARA ENCRIPTAR:
 
 # Genera la llave y la guarda en un archivo:
 def generate_key(): 
@@ -28,25 +29,64 @@ def encrypt_message(message):
     global encrypted_message
     encrypted_message = f.encrypt(encoded_message)
 
-   
 
 
 
 
-generate_key()
+# SECCIÓN CON CÓDIGO PARA DESENCRIPTAR:
 
+# Función que desencripta el mensaje:
+def decrypt_message(encrypted_message):
+    
+    key = input("INGRESE LA LLAVE: " )
+
+    f = Fernet(key)
+    
+    # Desencripta el mensaje usando la llave asignada a f, ingresada por el usuario.
+    decrypted_message = f.decrypt(encrypted_message)
+
+    print(decrypted_message.decode())
+
+
+
+
+
+# Inicio:
 if __name__ == "__main__":
-   mensaje = input("Ingrese el texto e encriptar: ")
+    #Opciones:
+    eleccion = input("""ELEGIR LA OPCIÓN DESEADA Y PRESIONAR ENTER:
+    1) PARA ENCRIPTAR MENSAJE
+    2) PARA DESENCRIPTAR UN MENSAJE ENCRIPTADO
 
-   encrypt_message(mensaje)
+    """)
+    
+    #Opción Encriptar:
+    if eleccion == "1":
+        
+        generate_key()
 
-   # Generamos un archivo de texto con el mensaje ya encriptado:
-   archivo_mensaje_encriptado = open("mensaje_encriptado.txt", "w")
-   archivo_mensaje_encriptado.write(str(encrypted_message))
-   archivo_mensaje_encriptado.close()
+        global mensaje
+        mensaje = input("INGRESE EL TEXTO A ENCRIPTAR: ")
 
-   print("Llave generada.")
-   print("Mensaje encriptado exitosamente.")
+        encrypt_message(mensaje)
 
+        # Generamos un archivo de texto con el mensaje ya encriptado:
+        archivo_mensaje_encriptado = open("mensaje_encriptado.txt", "w")
+        archivo_mensaje_encriptado.write(str(encrypted_message))
+        archivo_mensaje_encriptado.close()
 
+        print("LLAVE GENERADA.")
+        print("MENSAJE ENCRIPTADO CON ÉXITO")
 
+    
+    # Opción Desencriptar:    
+    elif eleccion == "2":
+        # Input para ingresar el mensaje encriptado:
+        
+        mensaje = input("INGRESE EL MENSAJE ENCRIPTADO: ")
+
+        # Codifica el mensaje a bytes y saca el b" iniciales y el " del final en el mensaje encriptado:
+        mensaje = mensaje.encode()[1:-1]
+        # el método encode() transforma las strings a bytes, necesarios para el módulo Fernet, que no acepta strings como tokens.
+
+        decrypt_message(mensaje)
